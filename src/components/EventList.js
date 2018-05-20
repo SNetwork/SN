@@ -1,10 +1,13 @@
+//Feed
+
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { View,ListView } from 'react-native';
 import { eventsFetch } from '../actions';
-import { Card, LoginSection,Input,  Button } from './common';
+import { Card, LoginSection,Input,  Button,Background } from './common';
 import ListItem from './ListItem';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 class EventList extends Component {
     componentWillMount() {
@@ -37,13 +40,13 @@ class EventList extends Component {
 
     render() {
        return(
-           <View style={{backgroundColor: '#e9edee', marginBottom: 8}}>
-           <ListView 
-           enableEmptySections
-           dataSource={this.dataSource}
-           renderRow={this.renderRow}
-           />
-           </View>
+           <Background>
+                  <ListView 
+                  enableEmptySections
+                  dataSource={this.dataSource}
+                  renderRow={this.renderRow}
+                  />
+           </Background>
        );
     }
 }

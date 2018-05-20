@@ -21,12 +21,12 @@ console.warn = message => {
 class App extends Component {
   componentWillMount(){
     const config = {
-      apiKey: "AIzaSyAHOP6WZaA3D6bqw-wPYJax9FDPo0ZIhUM",
-      authDomain: "social-network-d86d8.firebaseapp.com",
-      databaseURL: "https://social-network-d86d8.firebaseio.com",
-      projectId: "social-network-d86d8",
-      storageBucket: "social-network-d86d8.appspot.com",
-      messagingSenderId: "344179996750"
+      apiKey: "AIzaSyDrrR6swq-f8P8tHZUz66vfrQfzzWsJfUo",
+      authDomain: "socnet-3d3e1.firebaseapp.com",
+      databaseURL: "https://socnet-3d3e1.firebaseio.com",
+      projectId: "socnet-3d3e1",
+      storageBucket: "socnet-3d3e1.appspot.com",
+      messagingSenderId: "544028663825"
       };
       firebase.initializeApp(config);
     }
@@ -34,7 +34,7 @@ class App extends Component {
       const store = createStore(reducers, {}, applyMiddleware(ReduxThunk)); 
   return (
     <Provider store={store}>
-    <Router />
+        <Router />
     </Provider>
     );
   }

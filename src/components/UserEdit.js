@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import UserForm from './UserForm';
 import { userUpdate , userSave} from '../actions';
-import { Card, LoginSection, LoginButton,Button, Confirm } from './common';
+import { Card, LoginSection, LoginButton,Button, Confirm, Background } from './common';
 
 class UserEdit extends Component {
     state = { showModal: false };
@@ -26,21 +26,23 @@ class UserEdit extends Component {
 
     render() {
         return (
-            <Card>
-                <UserForm />
-                <LoginSection>
-                    <LoginButton onPress={() => this.setState({ showModal: !this.state.showModal })}>
-                        Save changes
-                    </LoginButton>
-                </LoginSection>
-                <Confirm 
-                visible={this.state.showModal}
-                onAccept={this.onAccept.bind(this)}
-                onDecline={this.onDecline.bind(this)}
-                >
-                    Edit Profile? 
-                </Confirm>
-            </Card>
+            <Background>
+                    <Card>
+                        <UserForm />
+                        <LoginSection>
+                            <LoginButton onPress={() => this.setState({ showModal: !this.state.showModal })}>
+                                Save changes
+                            </LoginButton>
+                        </LoginSection>
+                        <Confirm 
+                        visible={this.state.showModal}
+                        onAccept={this.onAccept.bind(this)}
+                        onDecline={this.onDecline.bind(this)}
+                        >
+                            Edit Profile? 
+                        </Confirm>
+                    </Card>
+            </Background>
         );
     }
 }

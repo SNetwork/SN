@@ -116,6 +116,12 @@ export const eventDelete = ({ uid }) => {
     return() => {
     firebase.database().ref(`/users/${firebase.auth().currentUser.uid}/joinedEvents/${uid}`)
     .remove()
+
+     firebase.database().ref(`events/${uid}`)
+        .remove()
+
+  firebase.database().ref(`/users/${firebase.auth().currentUser.uid}/createdEvents/${uid}`)
+        .remove() 
     .then(() => {
         firebase.database().ref(`/events/${uid}/joinedUsers/${firebase.auth().currentUser.uid}`)
         .remove()
@@ -123,3 +129,17 @@ export const eventDelete = ({ uid }) => {
     });
     };
 };
+
+export const unJoinEvent = ({ uid }) => {
+    return() => {
+    firebase.database().ref(`/users/${firebase.auth().currentUser.uid}/joinedEvents/${uid}`)
+    .remove()
+    }
+}
+
+export const goToChat = ({ uid }) => {
+    const chatId = uid;
+    return() => {
+        Actions.chat({ uid: chatId });
+    }
+}

@@ -7,10 +7,10 @@ const Input = ({ label , value , onChangeText, placeholder, secureTextEntry }) =
   return (
     <View style={containerStyle}>
    <TextInput
-       underlineColorAndroid="#000000" 
+       underlineColorAndroid='#6bb2ff'
       secureTextEntry={secureTextEntry}
       placeholder={placeholder}
-      placeholderTextColor="#000000"
+      placeholderTextColor='#6bb2ff'
       autoCorrect={false}
       style={inputStyle}
       value={value}
@@ -24,7 +24,7 @@ const styles = {
   inputStyle:{
   width:300,
   fontSize:16,
-  color:'#000000',
+  color:'#1369c6',
   flex : 2,
   //paddingLeft:20,
   

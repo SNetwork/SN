@@ -6,8 +6,8 @@ import {
  } from 'react-native';
  import { connect } from 'react-redux';
  import { Actions } from 'react-native-router-flux';
-import { Button, LoginSection,CardSection,Card,Confirm } from './common';
-import { eventDelete } from '../actions';
+import { FeedButton, LoginSection,CardSection,Card,Confirm } from './common';
+import { goToChat } from '../actions';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 class JoinedItem extends Component {
@@ -15,7 +15,7 @@ class JoinedItem extends Component {
 
   onAccept() {
     const { uid } = this.props.joinedevent;
-    this.props.eventDelete({ uid });
+    this.props.goToChat({ uid });
   }
 
  onDecline() {
@@ -27,73 +27,108 @@ class JoinedItem extends Component {
 
         return(
       <Card>
-            <LoginSection>
-              <EvilIcons name='user' color='#000' size={36} />
-              <Text style={styles.nameStyle}>
-                 {name}
-              </Text>
-              <Text style={styles.titleStyle}>
-                date: {date}
-              </Text>
-              <Text style={styles.titleStyle}>
-                location: {location}
-              </Text>
-            </LoginSection>
-            <CardSection>
-              <Text style={styles.titleStyle}>
-                 tag: {tag}
-              </Text>
-              <Text style={styles.titleStyle}>
-                 Description: {description}
-              </Text>
-            </CardSection>
-            <LoginSection>
-                <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
-                 UnJoin  
-                 </Button>
-            </LoginSection>
+                      <View style={styles.container}>
+                          <View style={styles.header}>
+                              <View style={styles.subsection1}>
+                                  <View style={styles.photo}>
+                                  </View>
+                                  
+                                  <View style={styles.mainInfo}>
+                                      <View style={styles.name}>
+                                          <Text style={styles.nameStyle}>
+                                               {name}
+                                          </Text>
+                                      </View>
+                                      
+                                      <View style={styles.LocDate}>
+                                          <View style={styles.location}>
+                                              <Text>
+                                                  {location}
+                                              </Text>
+                                          </View>
+                                          
+                                          <View style={styles.date}>
+                                              <Text>
+                                                  {date}
+                                              </Text>
+                                          </View>
+                                      </View>
+                                  </View>
+                              </View>
+                              
+                              <Text style={styles.description}>
+                                  {description}
+                              </Text>
+                          </View>
+                          
+                          <View style={styles.image}>
+                          </View>
+                          
+                          <View style={styles.footer}>
+                              <FeedButton onPress={() => this.setState({ showModal: !this.state.showModal })}>Chat</FeedButton>
+                          </View>
+                      </View>
             <Confirm 
                 visible={this.state.showModal}
                 onAccept={this.onAccept.bind(this)}
                 onDecline={this.onDecline.bind(this)}
                 >
-                     UnJoin Event? 
+                     Chat 
                 </Confirm>
-            </Card>
+                  </Card>
         );
     }
 }
 
 const styles ={
     container: {
-        flex: 1,
-        paddingTop: 20
-      },
-      listItem: {
-        height: 75,
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      leftSwipeItem: {
-        flex: 1,
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-        paddingRight: 20
-      },
-      rightSwipeItem: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingLeft: 20
-      },    
-    nameStyle: {
-        fontSize: 18,
-        paddingLeft: 15,
-        paddingRight:50,
+      flex: 1,
+      backgroundColor: '#fff',
+
     },
-    titleStyle: {
-        fontSize: 14,
-        paddingLeft: 15
-    }
+    header: {
+      padding: 10,
+    },
+    subsection1: {
+      flexDirection: 'row',
+    },
+    photo: {
+      height: 50,
+      width: 50,
+      backgroundColor: 'lightblue',
+      borderRadius: 25,
+    },
+    mainInfo: {
+      paddingLeft: 10,
+    },
+    name: {
+      
+    },
+    nameStyle: {
+      fontSize: 20,
+      color: '#2699fb',
+    },
+    LocDate: {
+      flexDirection: 'row',
+    },
+    location: {
+      marginRight: '7%',
+    },
+    date: {
+      
+    },
+    description: {
+      color: '#000',
+      marginTop: '3%',
+    },
+    image: {
+      height: 200,
+      flex: 1,
+      backgroundColor: 'lightblue',
+    },
+    footer: {
+      
+    },
 };
 const mapStateToProps = (state) => {
   const { name , date, location , tag , description } = state.eventForm;
@@ -104,8 +139,6 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
    { 
-      eventDelete
+    goToChat
   })
   (JoinedItem);
-
-

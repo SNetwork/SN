@@ -11,13 +11,13 @@ const LoginSection = (props) => {
 
 const styles = {
     containerStyle: {
-        padding: 4,
+        padding: 5,
         justifyContent: 'flex-start',
         flexDirection: 'row',
         position: 'relative',
-        marginLeft: 1,
-        marginRight: 1,
-        marginTop: 5,
+        //marginLeft: 1,
+        //marginRight: 1,
+        //marginTop: 5,
     }
 };
 

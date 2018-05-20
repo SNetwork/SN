@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { View,ListView } from 'react-native';
+import { View, ListView } from 'react-native';
 import { userFetch } from '../actions';
-import { Card, LoginSection,Input,  Button } from './common';
+import { Card, LoginSection, Input, Button, Background } from './common';
 import ProfileItem from './ProfileItem';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 class Profile extends Component {
     componentWillMount() {
         this.props.userFetch();
 
-       this.createDataSource(this.props);
+        this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -21,38 +22,38 @@ class Profile extends Component {
         this.createDataSource(nextProps);
     }
 
-    createDataSource ({ usersInfo }) {
+    createDataSource({ usersInfo }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
         this.dataSource = ds.cloneWithRows(usersInfo);
     }
-    
+
     renderRow(userInfo) {
         return (
-        <ProfileItem userInfo={userInfo} />
+            <ProfileItem userInfo={userInfo} />
         );
     }
 
     render() {
-       return(
-           <View style={{backgroundColor: '#e9edee'}}>
-           <ListView 
-           enableEmptySections
-           dataSource={this.dataSource}
-           renderRow={this.renderRow}
-           />
-           </View>
-       );
+        return (
+            <Background>
+                <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                />
+            </Background>
+        );
     }
 }
 
 const mapStateToProps = (state) => {
     const usersInfo = _.map(state.usersInfo, (val, uid) => {
-      return { ...val, uid };
-  });
+        return { ...val, uid };
+    });
     return { usersInfo };
-  };
-  
-  export default connect(mapStateToProps, { userFetch })(Profile);
+};
+
+export default connect(mapStateToProps, { userFetch })(Profile);

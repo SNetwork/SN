@@ -1,37 +1,31 @@
-//Кнопки в ивенте
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
 const Button = ({ onPress, children }) => {
-    const { buttonStyle , textStyle } = styles;
+    const { buttonStyle, textStyle } = styles;
 
-        return (
-         <TouchableOpacity onPress={onPress} style={buttonStyle}>
-         <Text style={textStyle}>
-         {children}
-         </Text>
-         </TouchableOpacity>
-        );
-    };
+    return (
+        <TouchableOpacity onPress={onPress} style={[buttonStyle, this.button]}>
+            <Text style={textStyle}>
+                {children}
+            </Text>
+        </TouchableOpacity>
+    );
+};
 
 const styles = {
     textStyle: {
-        alignSelf: 'center',
-        color: '#000000',
-        fontSize: 15,
+        color: '#2699fb',
+        fontSize: 20,
         fontWeight: '600',
-        paddingTop: 10,
-        paddingBottom: 10
+        textAlign: 'center',
     },
     buttonStyle: {
-        flex: 0.25,
-        alignSelf: 'stretch',
-        borderRadius: 30,
-        backgroundColor: 'rgba(255, 255, 255,0.7)',
+        height: 50,
+        padding: 10,
         borderWidth: 1,
-        borderColor: '#000000',
-        marginLeft:  '5%',
-        marginBottom: 5
+        borderColor: '#2699fb',
+        borderRadius: 5,
     }
 };
 

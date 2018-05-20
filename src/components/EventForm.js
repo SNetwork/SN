@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker } from 'react-native';
+import { View, Text, Picker, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { eventUpdate } from '../actions';
 import { LoginSection, Input } from './common';
@@ -22,6 +22,7 @@ class EventForm extends Component {
              <Input 
               label="Date"
               placeholder="24.06.2018"
+              keyboardType='numeric'
               value={this.props.date}
               onChangeText={value => this.props.eventUpdate({ prop: 'date', value })}
               /> 
@@ -46,11 +47,13 @@ class EventForm extends Component {
              </LoginSection>
 
              <LoginSection>
-             <Input 
+             <TextInput 
               label="Description"
               placeholder="....."
               value={this.props.description}
               onChangeText={value => this.props.eventUpdate({ prop: 'description', value })}
+              multiline = {true}
+              autoCorrect = {true}
               /> 
              </LoginSection>
       </View>

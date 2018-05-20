@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { View,ListView } from 'react-native';
 import { joinedeventsFetch } from '../actions';
-import { Card, LoginSection,Input,  Button } from './common';
+import { Card, LoginSection,Input,  Button, Background } from './common';
 import JoinedItem from './JoinedItem';
 
 class Joined extends Component {
@@ -37,13 +37,13 @@ class Joined extends Component {
 
     render() {
        return(
-           <View style={{backgroundColor: '#e9edee'}}>
-           <ListView 
-           enableEmptySections
-           dataSource={this.dataSource}
-           renderRow={this.renderRow}
-           />
-           </View>
+           <Background>
+                  <ListView 
+                  enableEmptySections
+                  dataSource={this.dataSource}
+                  renderRow={this.renderRow}
+                  />
+           </Background>
        );
     }
 }

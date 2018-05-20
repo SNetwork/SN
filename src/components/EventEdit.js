@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import EventForm from './EventForm';
 import { eventUpdate , eventSave, eventDelete } from '../actions';
-import { Card, LoginSection, LoginButton,Button, Confirm } from './common';
+import { Card, LoginSection, LoginButton,Button, Confirm, Background } from './common';
 
 class EventEdit extends Component {
     state = { showModal: false };
@@ -38,34 +38,36 @@ class EventEdit extends Component {
 
     render() {
         return (
-            <Card>
-                <EventForm />
-                <LoginSection>
-                    <LoginButton onPress={this.onButtonPress.bind(this)}>
-                        Save changes
-                    </LoginButton>
-                </LoginSection>
-
-                <LoginSection>
-                    <LoginButton onPress={this.onTextPress.bind(this)}>
-                    Text Schedule 
-                    </LoginButton>
-                </LoginSection>
-               
-                <LoginSection>
-                    <LoginButton onPress={() => this.setState({ showModal: !this.state.showModal })}>
-                 Delete 
-                    </LoginButton>
-                </LoginSection>
-
-                <Confirm 
-                visible={this.state.showModal}
-                onAccept={this.onAccept.bind(this)}
-                onDecline={this.onDecline.bind(this)}
-                >
-                     Are you sure you want to delete this? 
-                </Confirm>
-            </Card>
+            <Background>
+                    <Card>
+                        <EventForm />
+                        <LoginSection>
+                            <LoginButton onPress={this.onButtonPress.bind(this)}>
+                                Save changes
+                            </LoginButton>
+                        </LoginSection>
+        
+                        <LoginSection>
+                            <LoginButton onPress={this.onTextPress.bind(this)}>
+                            Text Schedule 
+                            </LoginButton>
+                        </LoginSection>
+                       
+                        <LoginSection>
+                            <LoginButton onPress={() => this.setState({ showModal: !this.state.showModal })}>
+                         Delete 
+                            </LoginButton>
+                        </LoginSection>
+        
+                        <Confirm 
+                        visible={this.state.showModal}
+                        onAccept={this.onAccept.bind(this)}
+                        onDecline={this.onDecline.bind(this)}
+                        >
+                             Are you sure you want to delete this? 
+                        </Confirm>
+                    </Card>
+            </Background>
         );
     }
 }

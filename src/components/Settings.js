@@ -3,46 +3,70 @@ import _ from 'lodash';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
-import { Card, LoginSection, Button, Confirm} from './common';
-
+import { Card, LoginSection, Button, Confirm, Background } from './common';
+import { Image } from 'react-native';
+import PhotoUpload from 'react-native-photo-upload';
+import DatePicker from 'react-native-datepicker'
 
 class Settings extends Component {
-    state = { showModal: false };
+  state = { showModal: false };
+  constructor(props) {
+    super(props)
+    this.state = { date: "2016-05-15" }
+  }
 
-    onAccept() {
-        this.props.logoutUser();
-    }
+  render() {
+    return (
+      <Background>
 
-   onDecline() {
-        this.setState({ showModal:false });
-    }
+        <DatePicker
+          style={{ width: 200,}}
+          date={this.state.date}
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          minDate="2016-05-01"
+          maxDate="2016-06-01"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          onDateChange={(date) => { this.setState({ date: date }) }}
+        />
 
+        <PhotoUpload
+          onPhotoSelect={avatar => {
+            if (avatar) {
+              console.log('Image base64 string: ', avatar)
+            }
+          }}
+        >
+          <Image
+            style={{
+              paddingVertical: 30,
+              width: 150,
+              height: 150,
+              borderRadius: 75
+            }}
+            resizeMode='cover'
+            source={{
+              uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+            }}
+          />
+        </PhotoUpload>
+      </Background>
+    );
+  }
 
-    render() {
-       return(
-           <View>
-           <LoginSection>
-                    <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
-                 Log Out
-                    </Button>
-                </LoginSection>
-                <Confirm 
-                visible={this.state.showModal}
-                onAccept={this.onAccept.bind(this)}
-                onDecline={this.onDecline.bind(this)}
-                >
-                     Are you sure you want to log out? 
-                </Confirm>
-           </View>
-       );
-    }
 }
-
-const mapStateToProps = (state) => {
-    const events = _.map(state.events, (val, uid) => {
-      return { ...val, uid };
-  });
-    return { events };
-  };
-  
-  export default connect(mapStateToProps, { logoutUser })(Settings);
+export default Settings;

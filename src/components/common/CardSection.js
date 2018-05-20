@@ -1,4 +1,5 @@
 //Рамка в посте тэг и описание
+
 import React from 'react';
 import { View } from 'react-native';
 
@@ -12,7 +13,7 @@ const CardSection = (props) => {
 
 const styles = {
     containerStyle: {
-        padding: 4,
+        padding: 5,
         justifyContent: 'flex-start',
         flexDirection: 'row',
         position: 'relative',

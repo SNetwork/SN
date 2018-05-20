@@ -18,9 +18,10 @@ export const userUpdate = ({ prop, value }) => {
 export const userCreate = ({ name , surname, age, location, hobby }) => {
     const currentUser = firebase.auth().currentUser.uid;
     const myRef = firebase.database().ref(`/users/${firebase.auth().currentUser.uid}/userInfo`).push();
+    const joinedEvents = 0;
 
     return (dispatch) => {
-        myRef.set({ name , surname, age, location, hobby })
+        myRef.set({ name , surname, age, location, hobby})
      .then(() => {
          dispatch({ type: USER_CREATE });
      });

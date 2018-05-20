@@ -9,6 +9,15 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 /***** Create component *****/
 
 class LoginForm extends Component {
+
+  /*componentWillMount(){
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        Actions.Feed();
+      }
+    })
+  }*/
+
   onEmailChange(text){
    this.props.emailChanged(text);
   }

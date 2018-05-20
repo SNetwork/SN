@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { eventUpdate, eventCreate } from '../actions';
-import { LoginButton,Card, LoginSection, Button } from './common';
+import { LoginButton,Card, LoginSection, Button, Background } from './common';
 import EventForm from './EventForm';
 
 class EventCreate extends Component {
@@ -15,14 +15,16 @@ class EventCreate extends Component {
 
     render() {
         return(
-         <Card>
-             <EventForm {...this.props}/>
-             <LoginSection>
-                 <LoginButton onPress={this.onButtonPress.bind(this)}>
-                      Create 
-                 </LoginButton>
-             </LoginSection>
-         </Card>
+        <Background>
+                <Card>
+                    <EventForm {...this.props}/>
+                    <LoginSection>
+                        <LoginButton onPress={this.onButtonPress.bind(this)}>
+                             Create 
+                        </LoginButton>
+                    </LoginSection>
+                </Card>
+        </Background>
         );
     }
 }

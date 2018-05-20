@@ -1,11 +1,14 @@
+//Компонент поста
 import React, { Component } from 'react';
-import { 
+import {
     Text,
     TouchableWithoutFeedback,
-    View
- } from 'react-native';
- import { Actions } from 'react-native-router-flux';
-import { Button, LoginSection,CardSection,Card } from './common';
+    View,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Button, LoginSection, CardSection, Card, FeedButton } from './common';
 import { eventJoin } from '../actions/EventActions';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Swipeable from 'react-native-swipeable';
@@ -14,93 +17,145 @@ class ListItem extends Component {
     state = {
         rightActionActivated: false,
         toggle: false
-      };
+    };
 
-      
     onButtonPress() {
-        Actions.eventEdit({ event: this.props.event });
+        Actions.Detailed({ event: this.props.event });
     }
+
     render() {
-        const {rightActionActivated, toggle} = this.state;
+        const { rightActionActivated, toggle } = this.state;
 
-        const { name , date, location , tag , description } = this.props.event;
+        const { name, date, location, tag, description } = this.props.event;
 
-        return(
-            <Swipeable
-        rightActionActivationDistance={100}
-        rightContent={(
-          <View style={[styles.rightSwipeItem, {backgroundColor: rightActionActivated ? 'green' : 'steelblue'}]}>
-            {rightActionActivated ?
-              <Text>Joined!</Text>
-                 :
-              <Text>keep pulling!</Text>}
-          </View>
-        )}
-        onRightActionActivate={() => this.setState({rightActionActivated: true})}
-        onRightActionDeactivate={() => this.setState({rightActionActivated: false})}
-        onRightActionComplete={() => this.setState({toggle: !toggle})}
-        onRightActionRelease={() => eventJoin(this.props.event )}
-      >
-      <Card>
-            <LoginSection>
-              <EvilIcons name='user' color='#000' size={36} />
-              <Text style={styles.nameStyle}>
-                 {name}
-              </Text>
-              <Text style={styles.titleStyle}>
-                date: {date}
-              </Text>
-              <Text style={styles.titleStyle}>
-                location: {location}
-              </Text>
-            </LoginSection>
-            <CardSection>
-              <Text style={styles.titleStyle}>
-                 tag: {tag}
-              </Text>
-              <Text style={styles.titleStyle}>
-                 Description: {description}
-              </Text>
-            </CardSection>
-            <LoginSection>
-            <Button onPress={eventJoin(this.props.event )}> Join </Button>
-            </LoginSection>
+        return (
+            <Card>
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <View style={styles.subsection1}>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={styles.photo}>
+                                    <Image
+                                        style={{
+                                            height: null,
+                                            width: null,
+                                            flex: 1,
+                                            borderRadius: 25,
+                                        }}
+                                        source={{
+                                            uri: 'https://scontent.flwo1-1.fna.fbcdn.net/v/t1.0-1/c120.0.720.720/11067469_10153348248977429_3631293933715085157_n.jpg?_nc_cat=0&oh=dbcca123d980ecc2571374fcbd534956&oe=5B888BCC'
+                                        }}
+                                    />
+                                </View>
+
+                                <View style={styles.mainInfo}>
+                                    <View style={styles.name}>
+                                        <Text style={styles.nameStyle}>
+                                            {name}
+                                        </Text>
+                                    </View>
+
+                                    <View style={styles.LocDate}>
+                                        <View style={styles.date}>
+                                            <Text>
+                                                {date}
+                                            </Text>
+                                        </View>
+
+                                        <View style={styles.location}>
+                                            <Text>
+                                                {location}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{alignItems: 'flex-end', justifyContent: 'center',}}>
+                                <View style={styles.details}>
+                                    <TouchableOpacity onPress={this.onButtonPress.bind(this)}>
+                                        <EvilIcons name='arrow-right' color='#2699fb' size={40} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
+                        <Text style={styles.description}>
+                            {description}
+                        </Text>
+                    </View>
+
+                    <View style={styles.image}>
+                        <Image
+                            style={{
+                                height: 200,
+                                width: null,
+                                flex: 1,
+                            }}
+                            source={{
+                                uri: 'https://water-links.s3.amazonaws.com/water-links-files/homepage-banner-cupped-hands.jpg'
+                            }}
+                        />
+                    </View>
+
+                    <View style={styles.footer}>
+                        <FeedButton onPress={eventJoin(this.props.event)}> Join </FeedButton>
+                    </View>
+                </View>
             </Card>
-      </Swipeable>
         );
     }
 }
 
-const styles ={
+
+const styles = {
     container: {
         flex: 1,
-        paddingTop: 20
-      },
-      listItem: {
-        height: 75,
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      leftSwipeItem: {
-        flex: 1,
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-        paddingRight: 20
-      },
-      rightSwipeItem: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingLeft: 20
-      },    
-    nameStyle: {
-        fontSize: 18,
-        paddingLeft: 15,
-        paddingRight:50,
+        backgroundColor: '#fff',
+
     },
-    titleStyle: {
-        fontSize: 14,
-        paddingLeft: 15
-    }
+    header: {
+        padding: 10,
+    },
+    subsection1: {
+        flexDirection: 'row',
+    },
+    photo: {
+        height: 50,
+        width: 50,
+    },
+    mainInfo: {
+        paddingLeft: 10,
+    },
+    details: {
+        paddingRight: 10,
+    },
+    name: {
+        flex: 1,
+    },
+    nameStyle: {
+        fontSize: 20,
+        color: '#2699fb',
+    },
+    LocDate: {
+        flexDirection: 'row',
+    },
+    location: {
+    },
+    date: {
+        marginRight: '7%',
+    },
+    description: {
+        color: '#454545',
+        marginTop: '3%',
+    },
+    image: {
+        height: 200,
+        flex: 1,
+        backgroundColor: 'lightblue',
+    },
+    footer: {
+
+    },
 };
 
 export default ListItem;
